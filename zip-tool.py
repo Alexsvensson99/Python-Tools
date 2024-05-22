@@ -8,16 +8,18 @@ class ZipFileApp:
     def __init__(self, root):
         self.root = root
         self.root.title("File Zipper")
-        self.root.geometry("500x400")
+        self.root.geometry("600x400")
+        self.root.configure(bg="#f0f0f0")
 
         self.file_paths = []
 
+        # Use a built-in theme like 'clam' and apply custom styling
         style = ttk.Style()
-        style.configure("TFrame", background="white")
-        style.configure("TLabel", background="white")
-        style.configure("TButton", padding=6, relief="flat", background="#0078d7", foreground="white")
-        style.map("TButton",
-                  background=[('active', '#005a9e')])
+        style.theme_use("clam")
+        style.configure("TFrame", background="#f0f0f0")
+        style.configure("TLabel", background="#f0f0f0", font=("Helvetica", 16))
+        style.configure("TButton", font=("Helvetica", 12))
+        style.configure("TScrollbar", background="#f0f0f0")
 
         self.frame = ttk.Frame(root, padding=10)
         self.frame.grid(row=0, column=0, sticky="nsew")
@@ -25,14 +27,14 @@ class ZipFileApp:
         self.root.grid_rowconfigure(0, weight=1)
         self.root.grid_columnconfigure(0, weight=1)
 
-        self.label = ttk.Label(self.frame, text="Select files to zip", font=("Helvetica", 16))
+        self.label = ttk.Label(self.frame, text="Select files to zip")
         self.label.grid(row=0, column=0, columnspan=2, pady=10)
 
         self.select_button = ttk.Button(self.frame, text="Select Files", command=self.add_files)
-        self.select_button.grid(row=1, column=0, pady=10)
+        self.select_button.grid(row=1, column=0, pady=10, padx=5, sticky="ew")
 
         self.remove_button = ttk.Button(self.frame, text="Remove Selected Files", command=self.remove_files)
-        self.remove_button.grid(row=1, column=1, pady=10)
+        self.remove_button.grid(row=1, column=1, pady=10, padx=5, sticky="ew")
 
         self.listbox_frame = ttk.Frame(self.frame)
         self.listbox_frame.grid(row=2, column=0, columnspan=2, sticky="nsew", pady=10)
